@@ -1,0 +1,61 @@
+{
+  "kind": "collectionType",
+  "collectionName": "talentos",
+  "info": {
+    "singularName": "talento",
+    "pluralName": "talentos",
+    "displayName": "Talent",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "surname": {
+      "type": "string",
+      "required": false
+    },
+    "email": {
+      "type": "email",
+      "required": true
+    },
+    "description": {
+      "type": "richtext",
+      "required": false
+    },
+    "images": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "audios": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "files"
+      ]
+    },
+    "gender": {
+      "type": "enumeration",
+      "enum": [
+        "masculino",
+        "feminino"
+      ],
+      "required": true
+    },
+    "locution_types": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::locution-type.locution-type"
+    }
+  }
+}

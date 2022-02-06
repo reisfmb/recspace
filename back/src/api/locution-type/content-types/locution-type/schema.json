@@ -1,0 +1,19 @@
+{
+  "kind": "collectionType",
+  "collectionName": "locution_types",
+  "info": {
+    "singularName": "locution-type",
+    "pluralName": "locution-types",
+    "displayName": "Locution Type"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "type": {
+      "type": "string",
+      "required": true
+    }
+  }
+}
