@@ -7,13 +7,19 @@
         </div>
         <div>
             <div class="menu__links">
-                <a v-for="link in links" :href="link.href">{{ link.title }}</a>
+                <router-link v-for="link in links" :to="{ name: link.routeName }">{{ link.title }}</router-link>
             </div>
             <div class="menu__filters">
-                <input type="text" placeholder="Nome" />
-                <input type="text" placeholder="Vozes" />
-                <input type="text" placeholder="Locuções" />
-                <button>Filtrar</button>
+                <input type="text" placeholder="Nome" v-model="selectedName" />
+                <MultiSelect placeholder="Vozes" :options="voices" v-model="selectedVoices" />
+                <MultiSelect
+                    placeholder="Tipos de locução"
+                    :options="locutionTypes"
+                    v-model="selectedLocutionTypes"
+                />
+                <a :href="$router.resolve({ name: 'Talents', query: queryObj }).href">
+                    <button>Filtrar</button>
+                </a>
             </div>
         </div>
         <div class="menu__socials">
@@ -27,16 +33,22 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 
+import MultiSelect from './Multiselect.vue';
+
+import { getLocutionTypes } from "../util";
+import { ILocutionType } from "../util/interfaces";
+
 import logo from '../assets/logo.png';
 
 export default defineComponent({
+    components: { MultiSelect },
     data: () => ({
         logo,
         links: [
-            { title: 'Talentos', href: '#' },
-            { title: 'Agencie-se', href: '#' },
-            { title: 'Quem Somos', href: '#' },
-            { title: 'Contato', href: '#' },
+            { title: 'Talentos', routeName: 'Talents' },
+            /* { title: 'Agencie-se', routeName: '#' },
+            { title: 'Quem Somos', routeName: '#' },
+            { title: 'Contato', routeName: '#' }, */
         ],
         socials: [
             { icon: 'fab fa-youtube', href: '#' },
@@ -44,7 +56,32 @@ export default defineComponent({
             { icon: 'fab fa-facebook', href: '#' },
         ],
 
-    })
+        voices: ['masculino', 'feminino'],
+        locutionTypes: [],
+
+        selectedName: '',
+        selectedVoices: '',
+        selectedLocutionTypes: '',
+    }),
+    async mounted() {
+        try {
+            this.locutionTypes = (await getLocutionTypes()).data
+                .map((lt: ILocutionType) => lt.attributes.type);
+        } catch (error) {
+            console.log(`Error when trying to get locution types`, error);
+        }
+    },
+    computed: {
+        queryObj() {
+            let queryObj = {} as any;
+
+            this.selectedName && (queryObj.name = this.selectedName);
+            this.selectedVoices.length > 0 && (queryObj.voices = this.selectedVoices/* .join('+') */);
+            this.selectedLocutionTypes.length > 0 && (queryObj.locutionTypes = this.selectedLocutionTypes/* .join('+') */);
+
+            return queryObj;
+        }
+    }
 })
 
 </script>

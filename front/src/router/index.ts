@@ -2,6 +2,7 @@ import { createWebHistory, createRouter } from "vue-router";
 
 import Home from "../pages/Home.vue";
 import Talent from "../pages/Talent.vue";
+import Talents from "../pages/Talents.vue";
 
 const routes = [
     {
@@ -13,6 +14,12 @@ const routes = [
         path: "/talento/:id",
         name: "Talent",
         component: Talent,
+        props: true,
+    },
+    {
+        path: "/talentos",
+        name: "Talents",
+        component: Talents,
         props: true,
     },
 ];

@@ -31,3 +31,19 @@ export async function getTalent(id: number, populate = false) {
         throw Error(await response.text());
     }
 }
+
+export async function getLocutionTypes() {
+    const endpoint = import.meta.env.VITE_API_URL
+        + '/locution-types'
+
+    const response = await fetch(endpoint, {
+        method: 'GET',
+        headers: { 'Authorization': 'Bearer ' + import.meta.env.VITE_API_TOKEN }
+    });
+
+    if (response.status === 200) {
+        return await response.json();
+    } else {
+        throw Error(await response.text());
+    }
+}

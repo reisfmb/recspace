@@ -12,6 +12,11 @@
             </router-link>
         </template>
     </div>
+    <div v-if="limit" class="talents__seeMore">
+        <router-link :to="{ name: 'Talents' }">
+            <button>Ver todos</button>
+        </router-link>
+    </div>
 </template>
 
 <script lang="ts">
@@ -24,32 +29,52 @@ export default defineComponent({
     props: {
         limit: {
             type: Number,
-            default: 8,
             required: false
-        }
+        },
     },
     data: () => ({
-        talents: [] as Array<ITalent>
+        talents: [] as Array<ITalent>,
+        filters: {
+            name: '',
+            voices: '',
+            locutionTypes: ''
+        }
     }),
     async mounted() {
         try {
             this.talents = (await getTalents(true)).data as Array<ITalent>;
 
-            if (this.limit && this.limit > 0) {
-                this.talents = this.talents.filter((_, index: number) => {
-                    return index < this.limit;
-                })
-            }
-
         } catch (error) {
             console.log('Error when trying to get talents', error);
         }
+
+        this.setFilters();
+        this.applyFilters();
+
     },
     methods: {
         getTalentImage(id: number) {
             const talent = this.talents.find((talent: ITalent) => talent.id === id);
             const talentFirstImage = talent?.attributes.images.data[0].attributes.formats.medium.url;
             return (import.meta.env.VITE_FRONT_URL || '') + (talentFirstImage || '');
+        },
+        setFilters() {
+            this.filters = {
+                name: this.$route.query.name?.toString() || '',
+                voices: this.$route.query.voices?.toString() || '',
+                locutionTypes: this.$route.query.locutionTypes?.toString() || '',
+            };
+        },
+        applyFilters() {
+            this.talents = this.talents.filter((talent: ITalent, index: number) => (
+                index < (this.limit || 1000)
+                && (this.filters.name ? this.normalizeString(talent.attributes.name) === this.normalizeString(this.filters.name) : true)
+                && (this.filters.voices ? this.normalizeString(this.filters.voices).indexOf(this.normalizeString(talent.attributes.gender)) >= 0 : true)
+                && (this.filters.locutionTypes ? talent.attributes.locution_types.data.some((lt) => this.normalizeString(this.filters.locutionTypes).indexOf(this.normalizeString(lt.attributes.type.toLowerCase())) >= 0) : true)
+            ));
+        },
+        normalizeString(str: string): string {
+            return str.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "");
         }
     }
 })
@@ -58,13 +83,34 @@ export default defineComponent({
 
 <style scoped>
 .talents__list {
+    position: relative;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
     padding: 50px;
     background-color: #2e456795;
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.talents__seeMore {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #2e456795;
+    padding-bottom: 50px;
+}
+
+.talents__seeMore button {
+    background-color: var(--blue1);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border: none;
+    font-size: 16px;
+    padding: 15px 20px;
+}
+
+.talents__seeMore button:hover {
+    background-color: var(--pink);
 }
 
 .talent__card {

@@ -125,6 +125,7 @@ export default defineComponent({
     border-radius: 10px;
     margin: 5px;
     text-transform: capitalize;
+    font-size: small;
 }
 .talent__details {
     color: white;

@@ -1,5 +1,5 @@
 <template>
-    <TalentsList />
+    <TalentsList :limit="2" />
     <section>
         <Faq />
         <div>
