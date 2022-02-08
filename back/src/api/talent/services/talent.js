@@ -1,9 +1,9 @@
 'use strict';
 
 /**
- * talento service.
+ * talent service.
  */
 
 const { createCoreService } = require('@strapi/strapi').factories;
 
-module.exports = createCoreService('api::talento.talento');
+module.exports = createCoreService('api::talent.talent');

@@ -1,9 +1,9 @@
 'use strict';
 
 /**
- * talento router.
+ * talent router.
  */
 
 const { createCoreRouter } = require('@strapi/strapi').factories;
 
-module.exports = createCoreRouter('api::talento.talento');
+module.exports = createCoreRouter('api::talent.talent');

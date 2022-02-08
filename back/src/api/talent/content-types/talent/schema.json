@@ -1,9 +1,9 @@
 {
   "kind": "collectionType",
-  "collectionName": "talentos",
+  "collectionName": "talents",
   "info": {
-    "singularName": "talento",
-    "pluralName": "talentos",
+    "singularName": "talent",
+    "pluralName": "talents",
     "displayName": "Talent",
     "description": ""
   },
@@ -17,8 +17,7 @@
       "required": true
     },
     "surname": {
-      "type": "string",
-      "required": false
+      "type": "string"
     },
     "email": {
       "type": "email",
@@ -26,7 +25,7 @@
     },
     "description": {
       "type": "richtext",
-      "required": false
+      "required": true
     },
     "images": {
       "type": "media",
@@ -44,6 +43,11 @@
         "files"
       ]
     },
+    "locution_types": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::locution-type.locution-type"
+    },
     "gender": {
       "type": "enumeration",
       "enum": [
@@ -51,11 +55,6 @@
         "feminino"
       ],
       "required": true
-    },
-    "locution_types": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::locution-type.locution-type"
     }
   }
 }

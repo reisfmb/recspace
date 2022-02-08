@@ -1,9 +1,9 @@
 'use strict';
 
 /**
- *  talento controller
+ *  talent controller
  */
 
 const { createCoreController } = require('@strapi/strapi').factories;
 
-module.exports = createCoreController('api::talento.talento');
+module.exports = createCoreController('api::talent.talent');
