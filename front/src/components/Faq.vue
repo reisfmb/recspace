@@ -1,9 +1,9 @@
 <template>
     <div class="faq">
-        <h4>Perguntas Frequentes</h4>
-        <div v-for="(data, index) in faqData">
-            <div class="faq__question" @click="handleQuestionClick(index)">{{ data.question }}</div>
-            <div v-show="indexToShow === index" class="faq__answer">{{ data.answer }}</div>
+        <h3>Perguntas Frequentes</h3>
+        <div v-for="(item, index) in data">
+            <div class="faq__question" @click="handleQuestionClick(index)">{{ item.question }}</div>
+            <div v-show="indexToShow === index" class="faq__answer">{{ item.answer }}</div>
         </div>
     </div>
 </template>
@@ -12,13 +12,13 @@
 import { defineComponent } from "vue";
 
 export default defineComponent({
+    props: {
+        data: {
+            type: Object as () => Array<{ question: string, answer: string }>,
+            required: true
+        }
+    },
     data: () => ({
-        faqData: [
-            { question: 'q1', answer: 'r1' },
-            { question: 'q2', answer: 'r2' },
-            { question: 'q3', answer: 'r3' }
-        ],
-
         indexToShow: -1
     }),
     methods: {
@@ -37,7 +37,7 @@ export default defineComponent({
     color: white;
     min-width: 500px;
 }
-.faq h4 {
+.faq h3 {
     font-size: 24px;
     text-transform: uppercase;
     text-align: center;

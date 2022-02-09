@@ -1,5 +1,7 @@
 <template>
-    <div class="footer"></div>
+    <div class="footer">
+        <p>Agência RecSpace | 2022</p>
+    </div>
 </template>
 
 <script lang="ts">
@@ -14,8 +16,15 @@ export default defineComponent({
 
 <style scoped>
 .footer {
-    margin-top: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     min-height: 100px;
     background-color: var(--blue1);
+}
+.footer p {
+    color: white;
+    text-align: center;
+    font-size: small;
 }
 </style>

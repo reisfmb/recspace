@@ -7,7 +7,12 @@
             readonly="true"
             :value="modelValue"
         />
-        <div v-show="showOptions" class="multiselect__options">
+        <div
+            v-show="showOptions"
+            class="multiselect__options"
+            @focusout="handleFocusOut"
+            tabindex="0"
+        >
             <ul>
                 <li
                     v-for="(option, index) in options"
@@ -50,6 +55,9 @@ export default defineComponent({
                 : this.selectedOptionsIndexes = [...this.selectedOptionsIndexes, index]
 
             this.$emit('update:modelValue', this.selectedOptionsString);
+        },
+        handleFocusOut() {
+            this.showOptions = false;
         }
     },
     computed: {

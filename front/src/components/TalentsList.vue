@@ -98,6 +98,7 @@ export default defineComponent({
     justify-content: center;
     background-color: #2e456795;
     padding-bottom: 50px;
+    border-bottom: 3px solid var(--blue1);
 }
 
 .talents__seeMore button {

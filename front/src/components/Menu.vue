@@ -46,9 +46,9 @@ export default defineComponent({
         logo,
         links: [
             { title: 'Talentos', routeName: 'Talents' },
-            /* { title: 'Agencie-se', routeName: '#' },
-            { title: 'Quem Somos', routeName: '#' },
-            { title: 'Contato', routeName: '#' }, */
+            //{ title: 'Agencie-se', routeName: '#' },
+            { title: 'Quem Somos', routeName: 'About' },
+            { title: 'Contato', routeName: 'Contact' },
         ],
         socials: [
             { icon: 'fab fa-youtube', href: '#' },

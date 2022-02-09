@@ -57,3 +57,22 @@ export interface ITalent {
         }
     }
 }
+
+export interface IPageHome {
+    id: number,
+    attributes: {
+        faq: Array<{
+            question: string,
+            answer: string,
+        }>,
+        text: string
+    }
+}
+
+export interface IPageAbout {
+    id: number,
+    attributes: {
+        image: { data: IImage },
+        text: string
+    }
+}

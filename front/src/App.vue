@@ -5,7 +5,7 @@ import Footer from './components/Footer.vue'
 
 <template>
   <Menu></Menu>
-  <router-view />
+  <router-view v-cloak />
   <Footer></Footer>
 </template>
 
@@ -36,6 +36,10 @@ button:hover {
   cursor: pointer;
   background-color: var(--pink);
   transform: translateX(3px);
+}
+
+[v-cloak] {
+  display: none;
 }
 
 .fade-enter-active,

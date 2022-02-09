@@ -3,6 +3,8 @@ import { createWebHistory, createRouter } from "vue-router";
 import Home from "../pages/Home.vue";
 import Talent from "../pages/Talent.vue";
 import Talents from "../pages/Talents.vue";
+import About from "../pages/About.vue";
+import Contact from "../pages/Contact.vue";
 
 const routes = [
     {
@@ -21,6 +23,16 @@ const routes = [
         name: "Talents",
         component: Talents,
         props: true,
+    },
+    {
+        path: "/quem-somos",
+        name: "About",
+        component: About,
+    },
+    {
+        path: "/contato",
+        name: "Contact",
+        component: Contact,
     },
 ];
 
