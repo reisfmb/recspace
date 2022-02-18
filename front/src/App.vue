@@ -24,8 +24,14 @@ body {
   font-family: "Roboto", sans-serif;
 }
 
+input {
+  border: none;
+  padding: 5px;
+}
+
 button {
   background-color: var(--blue2);
+  border: none;
   color: white;
   font-weight: bolder;
   border-radius: 5px;

@@ -1,5 +1,6 @@
 <template>
     <div v-if="talent && talent.attributes" class="talent__details">
+        <button class="button_cast" @click="addToCast(talent.id)">Adicionar ao cast</button>
         <div class="talent__images">
             <span class="talent__images__nav" @click="prevImage">
                 <i class="fas fa-caret-left"></i>
@@ -73,6 +74,19 @@ export default defineComponent({
         }
     },
     methods: {
+        addToCast(id: number) {
+            const lsCast = localStorage.getItem('rec-space-cast');
+            if (!lsCast) {
+                localStorage.setItem('rec-space-cast', JSON.stringify([id]))
+            } else {
+                localStorage.setItem('rec-space-cast', JSON.stringify([...JSON.parse(lsCast), id]));
+            }
+
+            if (localStorage.getItem('rec-space-cast'))
+                alert('Adicionado com sucesso!');
+            else
+                alert('Erro ao adicionar talento no cast!');
+        },
         getFullName() {
             return this.talent.attributes.name + ' ' + (this.talent.attributes.surname || '');
         },
@@ -118,6 +132,19 @@ export default defineComponent({
 </script>
 
 <style scoped>
+.button_cast {
+    position: absolute;
+    top: 0;
+    right: 0;
+    border-radius: 0px;
+    padding: 20px;
+    background-color: var(--pink);
+    text-transform: uppercase;
+}
+.button_cast:hover {
+    background-color: var(--blue2);
+    transform: translateX(0px);
+}
 .badge {
     display: inline-block;
     background-color: var(--blue2);
@@ -128,6 +155,7 @@ export default defineComponent({
     font-size: small;
 }
 .talent__details {
+    position: relative;
     color: white;
     display: flex;
     padding: 100px;

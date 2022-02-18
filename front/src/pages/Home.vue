@@ -1,5 +1,5 @@
 <template>
-    <TalentsList :limit="2" />
+    <TalentsList :limit="3" />
     <section v-if="page && page.attributes">
         <Faq :data="getFaqData()" />
         <div>

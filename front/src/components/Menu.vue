@@ -46,7 +46,8 @@ export default defineComponent({
         logo,
         links: [
             { title: 'Talentos', routeName: 'Talents' },
-            //{ title: 'Agencie-se', routeName: '#' },
+            { title: 'Agencie-se', routeName: 'AgencyForm' },
+            { title: 'Monte seu cast', routeName: 'Cast' },
             { title: 'Quem Somos', routeName: 'About' },
             { title: 'Contato', routeName: 'Contact' },
         ],
